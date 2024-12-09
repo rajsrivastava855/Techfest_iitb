@@ -1,0 +1,6 @@
+devel_space: /home/raj/techfest_ws/devel
+install: false
+install_space: /home/raj/techfest_ws/install
+profile: default
+source_space: /home/raj/techfest_ws/src
+workspace: /home/raj/techfest_ws

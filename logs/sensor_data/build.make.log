@@ -1,0 +1,8 @@
+[35m[1mScanning dependencies of target depth_publisher[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/depth_publisher.dir/src/publisher.cpp.o[0m
+[100%] [32m[1mLinking CXX executable /home/raj/techfest_ws/devel/.private/sensor_data/lib/sensor_data/depth_publisher[0m
+/usr/bin/ld: cannot find -lserial
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/depth_publisher.dir/build.make:102: /home/raj/techfest_ws/devel/.private/sensor_data/lib/sensor_data/depth_publisher] Error 1
+make[1]: *** [CMakeFiles/Makefile2:155: CMakeFiles/depth_publisher.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

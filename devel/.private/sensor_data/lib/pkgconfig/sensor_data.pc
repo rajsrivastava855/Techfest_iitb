@@ -1,0 +1,8 @@
+prefix=/home/raj/techfest_ws/devel/.private/sensor_data
+
+Name: sensor_data
+Description: Description of sensor_data
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp std_msgs serial

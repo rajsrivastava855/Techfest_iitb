@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/raj/techfest_ws/devel/.private/sensor_data/setup.sh
