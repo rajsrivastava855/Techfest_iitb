@@ -35,18 +35,15 @@ void receiveArray() {
   }
 }
 void setup() {
-  
    Serial.begin(9600);
 #if depthSensorConnected
   Wire.begin();
-
   /*while (!sensor.init())
   {
     delay(1000);
   }*/
     //Serial.println("Hello");
     sensor.init();
-    //Serial.println("Hello");
     sensor.setModel(MS5837::MS5837_30BA);
   sensor.setFluidDensity(1000); // kg/m^3 (freshwater, 1029 for seawater)
   //sensor.setModel(MS5837::MS5837_30BA);
@@ -56,7 +53,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   #if depthSensorConnected
 //  sensor.read(); //get sensor data
   double pressure = sensor.depth() - surface_pressure;
