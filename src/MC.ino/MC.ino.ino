@@ -1,4 +1,3 @@
-
 #include <Wire.h>
 #include "MS5837.h"
 #include<Servo.h>
@@ -7,11 +6,40 @@ uint8_t thrusterStatus = 0;
 #define depthSensorConnected 1
 double surface_pressure = 0;
 
+void sendFloat(float value) {
+  Serial.print("#A");  // Send identifier for a float
+  Serial.write((uint8_t*)&value, sizeof(value));  // Send float as 4 bytes
+  Serial.println();
+}
+
+void receiveArray() {
+  int arraySize = 0;
+  if (Serial.available() >= sizeof(int)) {
+    // Read array size
+    Serial.readBytes((char*)&arraySize, sizeof(int));
+
+    float receivedArray[arraySize];
+    for (int i = 0; i < arraySize; i++) {
+      while (Serial.available() < sizeof(float));  // Wait for float
+      Serial.readBytes((char*)&receivedArray[i], sizeof(float));
+    }
+
+    // Print the received array for verification
+    Serial.println("Array Received:");
+    for (int i = 0; i < arraySize; i++) {
+      Serial.print("Element ");
+      Serial.print(i);
+      Serial.print(": ");
+      Serial.println(receivedArray[i], 4);
+    }
+  }
+}
 void setup() {
-  // put your setup code here, to run once:
+  
    Serial.begin(9600);
 #if depthSensorConnected
   Wire.begin();
+
   /*while (!sensor.init())
   {
     delay(1000);
@@ -50,5 +78,21 @@ void loop() {
    Serial.println(dat); //send sensor data
 
 #endif
+  if (Serial.available() > 0) {
+    // Read incoming command
+    String command = Serial.readStringUntil('\n');  // Read until newline
+
+    if (command == "#A") {
+      // Send a float value when #A command is received
+      float testFloat = 3.1415;  // Example float to send
+      sendFloat(testFloat);
+      Serial.println("Float Sent.");
+    }
+    else if (command == "#B") {
+      // Receive an array of floats when #B command is received
+      Serial.println("Waiting to receive array...");
+      receiveArray();
+    }
+  }
  
 }
